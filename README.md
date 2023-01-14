@@ -98,24 +98,24 @@ gcode:
 You can also uncomment all variables if you like. The values are the same as the used default.
 
 ### New Feature: "Pause at next Layer" and "Pause at Layer #"
-This is based on a idea of Pedro Lamas. It let you add a Pause either at the next layer change or if you reach a given layer.
+This is based on a idea of Pedro Lamas. It let you add a Pause at the next layer change or if you reach a specific layer number.
 
 First you need to prepare your slicer as described in https://github.com/Klipper3d/klipper/pull/5726
 
 If you done that you can either use 
 ```
-SET_PAUSE_NEXT_LAYER [MACRO=name]
+SET_PAUSE_NEXT_LAYER [MACRO=<name>]
 ```
 to get execute the given GCODE macro at the next layer change. The MACRO is normally either PAUSE (default) or M600 (if you have specified it in your printer.cfg).
 
 Or use 
 ```
-SET_PAUSE_AT_LAYER LAYER=number [MACRO=name]
+SET_PAUSE_AT_LAYER LAYER=<number> [MACRO=<name>]
 ```
 to get execute the given GCODE macro at the given LAYER number change. The MACRO is normally either PAUSE (default) or M600 (if you have specified it in your printer.cfg).
 
 To remove the "Pause at Layer" simple send
 ```
-SET_PAUSE_AT_LAYER LAYER=number [MACRO=name]
+SET_PAUSE_AT_LAYER
 ```
 Both will clear after execution.
