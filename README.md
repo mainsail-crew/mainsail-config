@@ -1,6 +1,6 @@
 # Mainsail klipper macros and settings
 
-This is the new location of the macros and settings provided by the Mainsail team. The intent is to enable all user to setup important macros and settings needed by the mainsail UI.
+This is the new location of the macros and settings provided by the Mainsail team. The intent is to enable all users to setup important macros and settings needed by the mainsail UI.
 
 ### Important features
 - Park position depending on printer kinematics or user preference
@@ -8,17 +8,17 @@ This is the new location of the macros and settings provided by the Mainsail tea
   - Square beds Xmax:Ymax
   - User Position
 - PAUSE now supports option input parameters [X,Y,Z_MIN]
-  - That is helpfule to direct use the PAUSE macro in your M600 (see the mainsail.cfg for an example)
-- Customization via a simgl macro that contains all allowed variables
-- Additional custom variables for stuff like extra retact at CANCLE_PRINT. 
+  - That is helpful to direct the use of the PAUSE macro in your M600 (see the mainsail.cfg for an example)
+- Customization via a single macro that contains all allowed variables
+- Additional custom variables for stuff like extra retract at CANCEL_PRINT.
 
 ### Why have we decided to use a dedicated repo?
 There are 2 main reasons for that decision
 1) The current moonraker changes have shown that we need to react very fast on changes.
-2) We regular improve the macros and that is the simplest way that also the installed base can benefit from it.
+2) We regularly improve the macros and that is the simplest way that the installed base can benefit from it.
 
 ### How to install
-We currently do not provide an installer and we might never do. But doing it is simple copy and paste a few commands in a ssh terminal
+We currently do not provide an installer and we might never do. But doing it is simple copy and paste a few commands in an ssh terminal.
 The instructions assume that you have a up to data and working moonraker installation. If not start with updating your moonraker first.
 
 ```
