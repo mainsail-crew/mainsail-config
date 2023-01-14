@@ -11,6 +11,7 @@ This is the new location of the macros and settings provided by the Mainsail tea
   - That is helpful to direct the use of the PAUSE macro in your M600 (see the mainsail.cfg for an example)
 - Customization via a single macro that contains all allowed variables
 - Additional custom variables for stuff like extra retract at CANCEL_PRINT.
+- "Pause at next Layer" and "Pause at Layer #" 
 
 ### Why have we decided to use a dedicated repo?
 There are 2 main reasons for that decision
@@ -95,3 +96,26 @@ variable_custom_park_y   : 10.0  ; custom y position; value must be within your 
 gcode:
 ``` 
 You can also uncomment all variables if you like. The values are the same as the used default.
+
+### New Feature: "Pause at next Layer" and "Pause at Layer #"
+This is based on a idea of Pedro Lamas. It let you add a Pause either at the next layer change or if you reach a given layer.
+
+First you need to prepare your slicer as described in https://github.com/Klipper3d/klipper/pull/5726
+
+If you done that you can either use 
+```
+SET_PAUSE_NEXT_LAYER [MACRO=name]
+```
+to get execute the given GCODE macro at the next layer change. The MACRO is normally either PAUSE (default) or M600 (if you have specified it in your printer.cfg).
+
+Or use 
+```
+SET_PAUSE_AT_LAYER LAYER=number [MACRO=name]
+```
+to get execute the given GCODE macro at the given LAYER number change. The MACRO is normally either PAUSE (default) or M600 (if you have specified it in your printer.cfg).
+
+To remove the "Pause at Layer" simple send
+```
+SET_PAUSE_AT_LAYER LAYER=number [MACRO=name]
+```
+Both will clear after execution.
