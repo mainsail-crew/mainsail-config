@@ -20,7 +20,7 @@ There are 2 main reasons for that decision
 
 ### How to install
 We currently do not provide an installer and we might never do. But doing it is simple copy and paste a few commands in an ssh terminal.
-The instructions assume that you have a up to data and working moonraker installation. If not start with updating your moonraker first.
+The instructions assume that you have an up to data and working moonraker installation. If not start with updating your moonraker first.
 
 ```
 cd ~
@@ -28,7 +28,7 @@ git clone https://github.com/mainsail-crew/mainsail-config.git
 ln -sf ~/mainsail-config/mainsail.cfg ~/printer_data/config/mainsail.cfg
 ```
 ### Add updater section
-You need to update your moonraker.conf to get alway the latest version.
+You need to update your moonraker.conf to alway get the latest version.
 
 Either open your moonraker.conf and add 
 ```
@@ -45,7 +45,7 @@ You can also link and include the prepared file to your moonraker.conf. ssh in y
 ```
 ln -sf ~/mainsail-config/mainsail-moonraker-update.conf ~/printer_data/config/mainsail-moonraker-update.conf
 ```
-than open your moonraker.conf and add
+then open your moonraker.conf and add
 ```
 [include mainsail-moonraker-update.conf]
 ```
@@ -61,7 +61,7 @@ to your printer.cfg file. Be aware the file will show up as read only. This was 
 
 ### How to customize your settings
 ##### Different virtual sd card location or a different on_error_gcode
-for that simple copy the [virtual_sdcard] block from the mainsail.cfg and simple place it below your include. The result should look similar to:
+for that simply copy the [virtual_sdcard] block from the mainsail.cfg and simple place it below your include. The result should look similar to:
 ```
 [include mainsail.cfg]
 
@@ -95,7 +95,7 @@ variable_custom_park_y   : 10.0  ; custom y position; value must be within your 
 #variable_use_fw_retract  : False ; use fw_retraction instead of the manual version [True/False] 
 gcode:
 ``` 
-You can also uncomment all variables if you like. The values are the same as the used default.
+You can also uncomment all variables if you like. The values are the same as the user default.
 
 ### New Feature: "Pause at next Layer" and "Pause at Layer #"
 This is based on a idea of Pedro Lamas. It let you add a Pause at the next layer change or if you reach a specific layer number.
