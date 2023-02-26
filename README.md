@@ -7,6 +7,7 @@ This is the new location of the macros and settings provided by the Mainsail tea
   - Round beds 0:Ymax
   - Square beds Xmax:Ymax
   - User Position
+  - User can specify an differnt position for PAUSE and CANCEL_PRINT
 - PAUSE now supports option input parameters [X,Y,Z_MIN]
   - That is helpful to direct the use of the PAUSE macro in your M600 (see the mainsail.cfg for an example)
 - Customization via a single macro that contains all allowed variables
@@ -94,8 +95,39 @@ variable_custom_park_y   : 10.0  ; custom y position; value must be within your 
 ## !!! Caution [firmware_retraction] must be defined in the printer.cfg if you set use_fw_retract: True !!!
 #variable_use_fw_retract  : False ; use fw_retraction instead of the manual version [True/False] 
 gcode:
-``` 
+```
 You can also uncomment all variables if you like. The values are the same as the user default.
+
+##### Differnent park positon
+The following descrips how to setup a custom position for CANCEL_PRINT and PAUSE. As an example we asume the bed has asize of (300x300mm) and we want:
+- Position for CANCEL_PRINT: back right (295x295 mm) 
+- Position for PAUSE       : front left (10x10 mm)
+
+First copy the complete _CLIENT_VARIABLE macro from the mainsail.cfg and place it below your mainsail include. After that uncomment the needed variables or all. The values are the same as the default.
+After that we need to enter the needed values. See the result below:
+```
+[include mainsail.cfg]
+
+[gcode_macro _CLIENT_VARIABLE]
+variable_use_custom_pos   : True  ; use custom park coordinates for x,y [True/False]
+variable_custom_park_x    : 10.0  ; custom x position; value must be within your defined min and max of X
+variable_custom_park_y    : 10.0  ; custom y position; value must be within your defined min and max of Y
+variable_custom_park_dz   : 2.0   ; custom dz value; the value in mm to lift the nozzle when move to park position
+variable_retract          : 1.0   ; the value to retract while PAUSE
+variable_cancel_retract   : 5.0   ; the value to retract while CANCEL_PRINT
+variable_speed_retract    : 35.0  ; retract speed in mm/s
+variable_unretract        : 1.0   ; the value to unretract while RESUME
+variable_speed_unretract  : 35.0  ; unretract speed in mm/s
+variable_speed_hop        : 15.0  ; z move speed in mm/s
+variable_speed_move       : 100.0 ; move speed in mm/s
+variable_park_at_cancel   : True  ; allow to move the toolhead to park while execute CANCEL_PRINT [True/False]
+variable_park_at_cancel_x : 295.0 ; different park position during CANCEL_PRINT [None/Position as Float]; park_at_cancel must be True
+variable_park_at_cancel_y : 295.0 ; different park position during CANCEL_PRINT [None/Position as Float]; park_at_cancel must be True
+# !!! Caution [firmware_retraction] must be defined in the printer.cfg if you set use_fw_retract: True !!!
+variable_use_fw_retract  : False ; use fw_retraction instead of the manual version [True/False]
+gcode:
+```
+This way insures that older configs still work as before.
 
 ### New Feature: "Pause at next Layer" and "Pause at Layer #"
 This is based on a idea of Pedro Lamas. It let you add a Pause at the next layer change or if you reach a specific layer number.
