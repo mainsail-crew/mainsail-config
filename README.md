@@ -118,7 +118,7 @@ gcode:
 
 You can also uncomment all variables if you like. The values are the same as the user default.
 
-##### Differnent park positon
+##### Different park positon
 
 The following descrips how to setup a custom position for CANCEL_PRINT and PAUSE. As an example we asume the bed has asize of (300x300mm) and we want:
 
