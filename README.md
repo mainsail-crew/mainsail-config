@@ -153,6 +153,7 @@ gcode:
 
 This way insures that older configs still work as before.
 
+
 ### New Feature: "Pause at next Layer" and "Pause at Layer #"
 
 This is based on a idea of Pedro Lamas. It let you add a Pause at the next layer change or if you reach a specific layer number.
@@ -188,3 +189,21 @@ SET_PAUSE_AT_LAYER [ENABLE=0]
 ```
 
 Both will clear after execution.
+
+
+### New Feature: Save/Restore extruder temperature on pause/resume
+With commit https://github.com/mainsail-crew/mainsail-config/commit/ea19d723bcfbe3e57cff8a9abae36dc5e6a2d1a9 it is posible to switch off the extruder after entering PAUSE. RESUME will heatup the extruder if needed. That is helpful if you e.g. do a pause because of an runout and are not there. Be aware that doing that might have a negative effect on your print quality. Be aware the bed must be heated all the time!
+The following example shows you how to modify your [idle_timeout] to switch of the extruder in case the idle timeout kicks in.
+```ini
+[idle_timeout]
+gcode:
+  {% if printer.pause_resume.is_paused %}
+    {action_respond_info("Idle Timeout: Extruder powered down")}
+    M104 S0   ; Set Hot-end to 0C (off)
+  {% else %}
+    {action_respond_info("Idle Timeout: Stepper and Heater powered down")}
+    TURN_OFF_HEATERS
+    M84
+{% endif %}
+```
+
