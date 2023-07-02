@@ -14,6 +14,7 @@ This is the new location of the macros and settings provided by the Mainsail tea
 - Customization via a single macro that contains all allowed variables
 - Additional custom variables for stuff like extra retract at CANCEL_PRINT.
 - "Pause at next Layer" and "Pause at Layer #"
+- Different idle_timeout value when entering PAUSE
 
 ### Why have we decided to use a dedicated repo?
 
@@ -112,7 +113,8 @@ variable_custom_park_y   : 10.0  ; custom y position; value must be within your 
 #variable_speed_move      : 100.0 ; move speed in mm/s
 #variable_park_at_cancel  : False ; allow to move the toolhead to park while execute CANCEL_PRINT [True,False]
 ## !!! Caution [firmware_retraction] must be defined in the printer.cfg if you set use_fw_retract: True !!!
-#variable_use_fw_retract  : False ; use fw_retraction instead of the manual version [True/False] 
+#variable_use_fw_retract  : False ; use fw_retraction instead of the manual version [True/False]
+#variable_idle_timeout    : 0      ; time in sec until idle_timeout kicks in. Value 0 means that no value will be set or restored 
 gcode:
 ```
 
@@ -148,6 +150,7 @@ variable_park_at_cancel_x : 295.0 ; different park position during CANCEL_PRINT 
 variable_park_at_cancel_y : 295.0 ; different park position during CANCEL_PRINT [None/Position as Float]; park_at_cancel must be True
 # !!! Caution [firmware_retraction] must be defined in the printer.cfg if you set use_fw_retract: True !!!
 variable_use_fw_retract  : False ; use fw_retraction instead of the manual version [True/False]
+#variable_idle_timeout    : 0      ; time in sec until idle_timeout kicks in. Value 0 means that no value will be set or restored
 gcode:
 ```
 
@@ -207,3 +210,33 @@ gcode:
 {% endif %}
 ```
 
+### New Feature: change idle_timeout when going in PAUSE
+Many users falling in the trap of idle_timeout. This module is always activated an will shut down heaters and motors after 10 minutes if the printer is idle.
+Users may detect this behaivior first time after the install a runout sensor and have a runout when they are away of the printer.
+
+**To make it clear that is a safety feature and you should set your idle_timeout value with that in mind.**
+
+We therefor enhanced the PAUSE/RESUME/CANCEL_PRINT macros with the posibility to set and restore a different idle_timeout value as defined in your printer.cfg
+
+The following shows the example to set it to 1h when enetering PAUSE
+```ini
+#[gcode_macro _CLIENT_VARIABLE]
+#variable_use_custom_pos   : False ; use custom park coordinates for x,y [True/False]
+#variable_custom_park_x    : 0.0   ; custom x position; value must be within your defined min and max of X
+#variable_custom_park_y    : 0.0   ; custom y position; value must be within your defined min and max of Y
+#variable_custom_park_dz   : 2.0   ; custom dz value; the value in mm to lift the nozzle when move to park position
+#variable_retract          : 1.0   ; the value to retract while PAUSE
+#variable_cancel_retract   : 5.0   ; the value to retract while CANCEL_PRINT
+#variable_speed_retract    : 35.0  ; retract speed in mm/s
+#variable_unretract        : 1.0   ; the value to unretract while RESUME
+#variable_speed_unretract  : 35.0  ; unretract speed in mm/s
+#variable_speed_hop        : 15.0  ; z move speed in mm/s
+#variable_speed_move       : 100.0 ; move speed in mm/s
+#variable_park_at_cancel   : False ; allow to move the toolhead to park while execute CANCEL_PRINT [True/False]
+#variable_park_at_cancel_x : None  ; different park position during CANCEL_PRINT [None/Position as Float]; park_at_cancel must be True
+#variable_park_at_cancel_y : None  ; different park position during CANCEL_PRINT [None/Position as Float]; park_at_cancel must be True
+## !!! Caution [firmware_retraction] must be defined in the printer.cfg if you set use_fw_retract: True !!!
+#variable_use_fw_retract   : False ; use fw_retraction instead of the manual version [True/False]
+variable_idle_timeout     : 3600  ; time in sec until idle_timeout kicks in. Value 0 means that no value will be set or restored
+#gcode:
+```
