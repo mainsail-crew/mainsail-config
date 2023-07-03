@@ -114,7 +114,7 @@ variable_custom_park_y   : 10.0  ; custom y position; value must be within your 
 #variable_park_at_cancel  : False ; allow to move the toolhead to park while execute CANCEL_PRINT [True,False]
 ## !!! Caution [firmware_retraction] must be defined in the printer.cfg if you set use_fw_retract: True !!!
 #variable_use_fw_retract  : False ; use fw_retraction instead of the manual version [True/False]
-#variable_idle_timeout    : 0      ; time in sec until idle_timeout kicks in. Value 0 means that no value will be set or restored 
+#variable_idle_timeout    : 0     ; time in sec until idle_timeout kicks in. Value 0 means that no value will be set or restored 
 gcode:
 ```
 
@@ -149,8 +149,8 @@ variable_park_at_cancel   : True  ; allow to move the toolhead to park while exe
 variable_park_at_cancel_x : 295.0 ; different park position during CANCEL_PRINT [None/Position as Float]; park_at_cancel must be True
 variable_park_at_cancel_y : 295.0 ; different park position during CANCEL_PRINT [None/Position as Float]; park_at_cancel must be True
 # !!! Caution [firmware_retraction] must be defined in the printer.cfg if you set use_fw_retract: True !!!
-variable_use_fw_retract  : False ; use fw_retraction instead of the manual version [True/False]
-#variable_idle_timeout    : 0      ; time in sec until idle_timeout kicks in. Value 0 means that no value will be set or restored
+variable_use_fw_retract   : False  ; use fw_retraction instead of the manual version [True/False]
+variable_idle_timeout     : 0      ; time in sec until idle_timeout kicks in. Value 0 means that no value will be set or restored
 gcode:
 ```
 
@@ -220,7 +220,7 @@ We therefor enhanced the PAUSE/RESUME/CANCEL_PRINT macros with the posibility to
 
 The following shows the example to set it to 1h when enetering PAUSE
 ```ini
-#[gcode_macro _CLIENT_VARIABLE]
+[gcode_macro _CLIENT_VARIABLE]
 #variable_use_custom_pos   : False ; use custom park coordinates for x,y [True/False]
 #variable_custom_park_x    : 0.0   ; custom x position; value must be within your defined min and max of X
 #variable_custom_park_y    : 0.0   ; custom y position; value must be within your defined min and max of Y
@@ -238,5 +238,5 @@ The following shows the example to set it to 1h when enetering PAUSE
 ## !!! Caution [firmware_retraction] must be defined in the printer.cfg if you set use_fw_retract: True !!!
 #variable_use_fw_retract   : False ; use fw_retraction instead of the manual version [True/False]
 variable_idle_timeout     : 3600  ; time in sec until idle_timeout kicks in. Value 0 means that no value will be set or restored
-#gcode:
+gcode:
 ```
