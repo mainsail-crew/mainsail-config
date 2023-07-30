@@ -15,6 +15,7 @@ This is the new location of the macros and settings provided by the Mainsail tea
 - Additional custom variables for stuff like extra retract at CANCEL_PRINT.
 - "Pause at next Layer" and "Pause at Layer #"
 - Different idle_timeout value when entering PAUSE
+- Supports printer.cfg without any extruder e.g. cnc
 
 ### Why have we decided to use a dedicated repo?
 
@@ -208,6 +209,19 @@ gcode:
     TURN_OFF_HEATERS
     M84
 {% endif %}
+```
+**Update:** Some users reporting that this feature does intervear with their workflow. Therefor we improved it by
+- The temperature is only restored if you come out of idle_timeout
+- PAUSE gets a new paramter RESTORE [0/1]
+  - 1: Thats the default and enables the restore of temperature when comming out of idle_timeout.
+  - 0: The temperature will not restored.
+  
+That is helpfull if you use it in e.g a M600 macro where you want to insure that the temperature is never restored.
+
+```ini
+[gcode_macro M600]
+  description: Filament change
+  gcode: PAUSE X=10 Y=10 Z_MIN=50 RESTORE=0
 ```
 
 ### New Feature: change idle_timeout when going in PAUSE
