@@ -113,7 +113,7 @@ variable_custom_park_y   : 10.0  ; custom y position; value must be within your 
 #variable_speed_hop       : 15.0  ; z move speed in mm/s
 #variable_speed_move      : 100.0 ; move speed in mm/s
 #variable_park_at_cancel  : False ; allow to move the toolhead to park while execute CANCEL_PRINT [True,False]
-#variable_macro_at_cancel  : False ; execute a user defined macro named CANCEL_PRINT_EXTRA_CMD at the end of CANCEL_PRINT [True/False]
+#variable_macro_at_cancel : False ; execute a user defined macro named CANCEL_PRINT_EXTRA_CMD at the end of CANCEL_PRINT [True/False]
 ## !!! Caution [firmware_retraction] must be defined in the printer.cfg if you set use_fw_retract: True !!!
 #variable_use_fw_retract  : False ; use fw_retraction instead of the manual version [True/False]
 #variable_idle_timeout    : 0     ; time in sec until idle_timeout kicks in. Value 0 means that no value will be set or restored 
