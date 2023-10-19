@@ -113,6 +113,7 @@ variable_custom_park_y   : 10.0  ; custom y position; value must be within your 
 #variable_speed_hop       : 15.0  ; z move speed in mm/s
 #variable_speed_move      : 100.0 ; move speed in mm/s
 #variable_park_at_cancel  : False ; allow to move the toolhead to park while execute CANCEL_PRINT [True,False]
+#variable_macro_at_cancel  : False ; execute a user defined macro named CANCEL_PRINT_EXTRA_CMD at the end of CANCEL_PRINT [True/False]
 ## !!! Caution [firmware_retraction] must be defined in the printer.cfg if you set use_fw_retract: True !!!
 #variable_use_fw_retract  : False ; use fw_retraction instead of the manual version [True/False]
 #variable_idle_timeout    : 0     ; time in sec until idle_timeout kicks in. Value 0 means that no value will be set or restored 
@@ -149,6 +150,7 @@ variable_speed_move       : 100.0 ; move speed in mm/s
 variable_park_at_cancel   : True  ; allow to move the toolhead to park while execute CANCEL_PRINT [True/False]
 variable_park_at_cancel_x : 295.0 ; different park position during CANCEL_PRINT [None/Position as Float]; park_at_cancel must be True
 variable_park_at_cancel_y : 295.0 ; different park position during CANCEL_PRINT [None/Position as Float]; park_at_cancel must be True
+variable_macro_at_cancel  : False ; execute a user defined macro named CANCEL_PRINT_EXTRA_CMD at the end of CANCEL_PRINT [True/False]
 # !!! Caution [firmware_retraction] must be defined in the printer.cfg if you set use_fw_retract: True !!!
 variable_use_fw_retract   : False  ; use fw_retraction instead of the manual version [True/False]
 variable_idle_timeout     : 0      ; time in sec until idle_timeout kicks in. Value 0 means that no value will be set or restored
@@ -249,8 +251,49 @@ The following shows the example to set it to 1h when enetering PAUSE
 #variable_park_at_cancel   : False ; allow to move the toolhead to park while execute CANCEL_PRINT [True/False]
 #variable_park_at_cancel_x : None  ; different park position during CANCEL_PRINT [None/Position as Float]; park_at_cancel must be True
 #variable_park_at_cancel_y : None  ; different park position during CANCEL_PRINT [None/Position as Float]; park_at_cancel must be True
+#variable_macro_at_cancel  : False ; execute a user defined macro named CANCEL_PRINT_EXTRA_CMD at the end of CANCEL_PRINT [True/False]
 ## !!! Caution [firmware_retraction] must be defined in the printer.cfg if you set use_fw_retract: True !!!
 #variable_use_fw_retract   : False ; use fw_retraction instead of the manual version [True/False]
 variable_idle_timeout     : 3600  ; time in sec until idle_timeout kicks in. Value 0 means that no value will be set or restored
 gcode:
 ```
+
+### New Feature: added the option to run a custom macro on CANCEL_PRINT
+Many users have devices that need to be switched off when a print is canceled, such as extruder lights, main chamber lights, or air filter fans.
+
+To enable these tasks, we have added the option to run a custom macro named CANCEL_PRINT_EXTRA_CMD, which will be executed at the end of the CANCEL_PRINT macro. Inside this macro, users have the ability to issue all the necessary commands to switch off any devices that were activated during the printing process.
+
+To enable this function, simply set the variable_macro_at_cancel to True and create a macro named CANCEL_PRINT_EXTRA_CMD containing the commands to be executed.
+
+Here's an example of how to implement this option:
+
+```ini
+[gcode_macro _CLIENT_VARIABLE]
+#variable_use_custom_pos   : False ; use custom park coordinates for x,y [True/False]
+#variable_custom_park_x    : 0.0   ; custom x position; value must be within your defined min and max of X
+#variable_custom_park_y    : 0.0   ; custom y position; value must be within your defined min and max of Y
+#variable_custom_park_dz   : 2.0   ; custom dz value; the value in mm to lift the nozzle when move to park position
+#variable_retract          : 1.0   ; the value to retract while PAUSE
+#variable_cancel_retract   : 5.0   ; the value to retract while CANCEL_PRINT
+#variable_speed_retract    : 35.0  ; retract speed in mm/s
+#variable_unretract        : 1.0   ; the value to unretract while RESUME
+#variable_speed_unretract  : 35.0  ; unretract speed in mm/s
+#variable_speed_hop        : 15.0  ; z move speed in mm/s
+#variable_speed_move       : 100.0 ; move speed in mm/s
+#variable_park_at_cancel   : False ; allow to move the toolhead to park while execute CANCEL_PRINT [True/False]
+#variable_park_at_cancel_x : None  ; different park position during CANCEL_PRINT [None/Position as Float]; park_at_cancel must be True
+#variable_park_at_cancel_y : None  ; different park position during CANCEL_PRINT [None/Position as Float]; park_at_cancel must be True
+variable_macro_at_cancel   : True  ; execute a user defined macro named CANCEL_PRINT_EXTRA_CMD at the end of CANCEL_PRINT [True/False]
+## !!! Caution [firmware_retraction] must be defined in the printer.cfg if you set use_fw_retract: True !!!
+#variable_use_fw_retract   : False ; use fw_retraction instead of the manual version [True/False]
+#variable_macro_at_cancel  : True  ; time in sec until idle_timeout kicks in. Value 0 means that no value will be set or set or restored
+gcode:
+
+
+[gcode_macro CANCEL_PRINT_EXTRA_CMD]
+gcode:
+  SET_FAN_SPEED FAN=chamber_filter SPEED=0          ; switch off the chamber filters
+  SET_LED LED=chamber_filter RED=0 GREEN=0 BLUE=0   ; switch off the chamber lights
+  SET_PIN PIN=extruder_light VALUE=0                ; switch off the extruder lights
+```
+
