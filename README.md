@@ -237,7 +237,7 @@ description: Filament change
 gcode: PAUSE X=10 Y=10 Z_MIN=50 RESTORE=0
 ```
 
-**2nd Update:** After I get reports from user's that this does not work I found out that I head a missed an important fact in my thoughts. Any interaction with the printer, e.g. change temperature or use a filament load/unload macro will disable the IDLE state.
+**2nd Update:** After I get reports from user's that this does not work, during further debug I found out that I missed an important fact in my thoughts. Any interaction with the printer, e.g. change temperature or use a filament load/unload macro will disable the IDLE state.
 The only solution to solve it is an independent controlled variable.
 For that idle_state is added and that needs to be set in your [idle_timeout]
 ```ini
