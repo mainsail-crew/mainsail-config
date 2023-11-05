@@ -31,7 +31,7 @@ There are 2 main reasons for that decision
 ### How to install
 
 We currently do not provide an installer and we might never do. But doing it is simple copy and paste a few commands in an ssh terminal.
-The instructions assume that you have an up-to-data and working moonraker installation. If not start with updating your moonraker first.
+The instructions assume that you have an up-to-date and working moonraker installation. If not start with updating your moonraker first.
 
 ```sh
 cd ~
