@@ -124,9 +124,9 @@ variable_custom_park_y   : 10.0  ; custom y position; value must be within your 
 #variable_idle_timeout     : 0     ; time in sec until idle_timeout kicks in. Value 0 means that no value will be set or restored
 #variable_runout_sensor    : ""    ; If a sensor is defined, it will be used to cancel the execution of RESUME in case no filament is detected.
 ##                                   Specify the config name of the runout sensor e.g "filament_switch_sensor runout". Hint use the same as in your printer.cfg
-## !!! Custom macros, please use it with care and review the place where it is in the corresponding macro.
-## This is meant for stuff like setting a status LED. Please check that your macro does not interfere with the basic function of the 3 macros.
-## Only a single line is supported, please generate a macro if you need more than one entry.
+## !!! Custom macros, please use with care and review the section of the corresponding macro.
+## These macros are for simple operations like setting a status LED. Please make sure your macro does not interfere with the basic macro functions.
+## Only  single line commands are supported, please create a macro if you need more than one command.
 #variable_user_pause_macro : ""    ; Everything insight the "" will be executed after the klipper base pause (PAUSE_BASE) function
 #variable_user_resume_macro: ""    ; Everything insight the "" will be executed before the klipper base resume (RESUME_BASE) function
 #variable_user_cancel_macro: ""    ; Everything insight the "" will be executed before the klipper base cancel (CANCEL_PRINT_BASE) function
@@ -168,9 +168,9 @@ variable_use_fw_retract   : False ; use fw_retraction instead of the manual vers
 variable_idle_timeout     : 0     ; time in sec until idle_timeout kicks in. Value 0 means that no value will be set or restored
 variable_runout_sensor    : ""    ; If a sensor is defined, it will be used to cancel the execution of RESUME in case no filament is detected.
 #                                   Specify the config name of the runout sensor e.g "filament_switch_sensor runout". Hint use the same as in your printer.cfg
-# !!! Custom macros, please use it with care and review the place where it is in the corresponding macro.
-# This is meant for stuff like setting a status LED. Please check that your macro does not interfere with the basic function of the 3 macros.
-# Only a single line is supported, please generate a macro if you need more than one entry.
+## !!! Custom macros, please use with care and review the section of the corresponding macro.
+## These macros are for simple operations like setting a status LED. Please make sure your macro does not interfere with the basic macro functions.
+## Only  single line commands are supported, please create a macro if you need more than one command.
 variable_user_pause_macro : ""    ; Everything insight the "" will be executed after the klipper base pause (PAUSE_BASE) function
 variable_user_resume_macro: ""    ; Everything insight the "" will be executed before the klipper base resume (RESUME_BASE) function
 variable_user_cancel_macro: ""    ; Everything insight the "" will be executed before the klipper base cancel (CANCEL_PRINT_BASE) function
@@ -288,9 +288,9 @@ The following shows the example to set it to 1h when enetering PAUSE
 variable_idle_timeout     : 3600   ; time in sec until idle_timeout kicks in. Value 0 means that no value will be set or restored
 #variable_runout_sensor    : ""    ; If a sensor is defined, it will be used to cancel the execution of RESUME in case no filament is detected.
 ##                                   Specify the config name of the runout sensor e.g "filament_switch_sensor runout". Hint use the same as in your printer.cfg
-## !!! Custom macros, please use it with care and review the place where it is in the corresponding macro.
-## This is meant for stuff like setting a status LED. Please check that your macro does not interfere with the basic function of the 3 macros.
-## Only a single line is supported, please generate a macro if you need more than one entry.
+## !!! Custom macros, please use with care and review the section of the corresponding macro.
+## These macros are for simple operations like setting a status LED. Please make sure your macro does not interfere with the basic macro functions.
+## Only  single line commands are supported, please create a macro if you need more than one command.
 #variable_user_pause_macro : ""    ; Everything insight the "" will be executed after the klipper base pause (PAUSE_BASE) function
 #variable_user_resume_macro: ""    ; Everything insight the "" will be executed before the klipper base resume (RESUME_BASE) function
 #variable_user_cancel_macro: ""    ; Everything insight the "" will be executed before the klipper base cancel (CANCEL_PRINT_BASE) function
@@ -329,9 +329,9 @@ variable_use_fw_retract   : False ; use fw_retraction instead of the manual vers
 variable_idle_timeout     : 0     ; time in sec until idle_timeout kicks in. Value 0 means that no value will be set or restored
 variable_runout_sensor    : ""    ; If a sensor is defined, it will be used to cancel the execution of RESUME in case no filament is detected.
 #                                   Specify the config name of the runout sensor e.g "filament_switch_sensor runout". Hint use the same as in your printer.cfg
-# !!! Custom macros, please use it with care and review the place where it is in the corresponding macro.
-# This is meant for stuff like setting a status LED. Please check that your macro does not interfere with the basic function of the 3 macros.
-# Only a single line is supported, please generate a macro if you need more than one entry.
+## !!! Custom macros, please use with care and review the section of the corresponding macro.
+## These macros are for simple operations like setting a status LED. Please make sure your macro does not interfere with the basic macro functions.
+## Only  single line commands are supported, please create a macro if you need more than one command.
 variable_user_pause_macro : "SET_MY_STATUS_LED STATUS=pause"    ; Everything insight the "" will be executed after the klipper base pause (PAUSE_BASE) function
 variable_user_resume_macro: "SET_MY_STATUS_LED STATUS=printing" ; Everything insight the "" will be executed before the klipper base resume (RESUME_BASE) function
 variable_user_cancel_macro: "SET_MY_STATUS_LED STATUS=cancel"   ; Everything insight the "" will be executed before the klipper base cancel (CANCEL_PRINT_BASE) function
